@@ -263,6 +263,10 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
         $query = $this->model->newQuery();
 
+        if($translate) {
+            $query->with('translations');
+        }
+
         if (!empty($conditions['trash'])) {
             $query->onlyTrashed();
         }
