@@ -255,7 +255,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $query->get();
     }
 
-    public function listPaginated(array $filters = [], array $conditions = []): LengthAwarePaginator|EncryptionEloquentBuilder
+    public function listPaginated(array $filters = [], array $conditions = [], $translate = false): LengthAwarePaginator|EncryptionEloquentBuilder
     {
         $order = $filters['order'];
         $sort = $filters['sort'];

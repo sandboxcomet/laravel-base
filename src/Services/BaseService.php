@@ -80,7 +80,7 @@ abstract class BaseService
         return $this->repository->list($filters);
     }
 
-    public function listPaginated(array $filters = [], array $conditions = [])
+    public function listPaginated(array $filters = [], array $conditions = [], $translate = false)
     {
         return $this->repository->listPaginated($filters, $conditions);
     }
