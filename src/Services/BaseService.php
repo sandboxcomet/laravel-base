@@ -3,8 +3,11 @@
 namespace Sandbox\Base\Services;
 
 use Sandbox\Base\Repositories\BaseRepository;
+use Sandbox\DBEncryption\Builders\EncryptionEloquentBuilder;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class BaseService
 {
@@ -75,12 +78,12 @@ abstract class BaseService
         return $this->repository->grouping($fields, $filters);
     }
 
-    public function list(array $filters = [])
+    public function list(array $filters = []): Collection|EncryptionEloquentBuilder
     {
         return $this->repository->list($filters);
     }
 
-    public function listPaginated(array $filters = [], array $conditions = [], $translate = false)
+    public function listPaginated(array $filters = [], array $conditions = [], $translate = false): LengthAwarePaginator|EncryptionEloquentBuilder
     {
         return $this->repository->listPaginated($filters, $conditions);
     }

@@ -2,7 +2,11 @@
 
 namespace Sandbox\Base\Interfaces;
 
+use Sandbox\DBEncryption\Builders\EncryptionEloquentBuilder;
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface BaseRepositoryInterface
 {
@@ -18,7 +22,7 @@ interface BaseRepositoryInterface
     public function deleteAll();
     public function translation(Model $model, array $params);
     public function grouping(array $fields = []);
-    public function list(array $filters = []);
-    public function listPaginated(array $filters = [], array $conditions = [], $translate = false);
+    public function list(array $filters = []): Collection|EncryptionEloquentBuilder;
+    public function listPaginated(array $filters = [], array $conditions = [], $translate = false): LengthAwarePaginator|EncryptionEloquentBuilder;
     public function  nextPriority(): int;
 }
