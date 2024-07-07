@@ -85,7 +85,7 @@ abstract class BaseService
 
     public function listPaginated(array $filters = [], array $conditions = [], $translate = false): LengthAwarePaginator|EncryptionEloquentBuilder
     {
-        return $this->repository->listPaginated($filters, $conditions);
+        return $this->repository->listPaginated($filters, $conditions, $translate);
     }
 
     public function nextPriority(): int
