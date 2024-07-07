@@ -1,0 +1,13 @@
+{
+  "name": "laravel-base",
+  "version": "1.0.0",
+  "description": "```bash composer require sandbox-dev/laravel-base ```",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "bash command.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
