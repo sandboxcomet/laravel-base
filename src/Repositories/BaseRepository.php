@@ -276,6 +276,10 @@ abstract class BaseRepository implements BaseRepositoryInterface
             $query = self::filters($query, $conditions, false);
         }
 
+        if (isset($filters['user_id'])) {
+            $query->where('user_id', $filters['user_id']);
+        }
+
         if (isset($filters['from'])) {
             $from = Carbon::createFromFormat('Y-m-d', $filters['from'])->startOfDay();
             $query->where('created_at', '>=', $from);
