@@ -35,6 +35,10 @@ abstract class BaseRepository implements BaseRepositoryInterface
                 foreach ($filter as $value => $operator) {
                     if ($operator === 'like') {
                         $query->where($column, $operator, '%' . $value . '%');
+                    } else if (in_array($operator, ['null', 'NULL', 'nil'])) {
+                        $query->whereNull($column);
+                    } else if (in_array($operator, ['not_null', 'NOT_NULL', 'NOTNULL'])) {
+                        $query->whereNotNull($column);
                     } else {
                         $query->where($column, $operator, $value);
                     }
@@ -225,6 +229,14 @@ abstract class BaseRepository implements BaseRepositoryInterface
         $sort = $filters['sort'] ?? 'desc';
         $query = $this->model->newQuery();
 
+        if (isset($filters['user_id'])) {
+            if (in_array($filters['user_id'], ['null', 'NULL', 'nil'])) {
+                $query->whereNull('user_id');
+            } else {
+                $query->where('user_id', $filters['user_id']);
+            }
+        }
+
         if (isset($filters['from'])) {
             $from = Carbon::createFromFormat('Y-m-d', $filters['from'])->startOfDay();
             $query->where('created_at', '>=', $from);
@@ -282,14 +294,6 @@ abstract class BaseRepository implements BaseRepositoryInterface
                 $query->whereNull('user_id');
             } else {
                 $query->where('user_id', $filters['user_id']);
-            }
-        }
-
-        if (isset($filters['company_id'])) {
-            if (in_array($filters['company_id'], ['null', 'NULL', 'nil'])) {
-                $query->whereNull('company_id');
-            } else {
-                $query->where('company_id', $filters['company_id']);
             }
         }
 

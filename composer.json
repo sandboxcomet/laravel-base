@@ -1,5 +1,5 @@
 {
-    "name": "sandbox-dev/laravel-base",
+    "name": "sandbox/laravel-base",
     "description": "Laravel Base Package",
 	"type": "library",
     "license": "MIT",

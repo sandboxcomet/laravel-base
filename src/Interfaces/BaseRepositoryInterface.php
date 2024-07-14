@@ -24,5 +24,5 @@ interface BaseRepositoryInterface
     public function grouping(array $fields = []);
     public function list(array $filters = []): Collection|EncryptionEloquentBuilder;
     public function listPaginated(array $filters = [], array $conditions = [], $translate = false): LengthAwarePaginator|EncryptionEloquentBuilder;
-    public function  nextPriority(): int;
+    public function nextPriority(): int;
 }
