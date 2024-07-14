@@ -241,11 +241,12 @@ abstract class BaseRepository implements BaseRepositoryInterface
         }
 
         if (isset($filters['keyword'])) {
+            $table = $this->model->getTable();
             $columns = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
             $keyword = $filters['keyword'];
             $query->where(function ($query) use ($keyword, $columns) {
                 foreach ($columns as $column) {
-                    $query->orWhere($column, 'LIKE', '%' . $keyword . '%');
+                    $query->orWhere($table . '.' . $column, 'LIKE', '%' . $keyword . '%');
                 }
             });
         }
@@ -277,11 +278,19 @@ abstract class BaseRepository implements BaseRepositoryInterface
         }
 
         if (isset($filters['user_id'])) {
-            $query->where('user_id', $filters['user_id']);
+            if (in_array($filters['user_id'], ['null', 'NULL', 'nil'])) {
+                $query->whereNull('user_id');
+            } else {
+                $query->where('user_id', $filters['user_id']);
+            }
         }
 
         if (isset($filters['company_id'])) {
-            $query->where('company_id', $filters['company_id']);
+            if (in_array($filters['company_id'], ['null', 'NULL', 'nil'])) {
+                $query->whereNull('company_id');
+            } else {
+                $query->where('company_id', $filters['company_id']);
+            }
         }
 
         if (isset($filters['from'])) {
@@ -305,11 +314,12 @@ abstract class BaseRepository implements BaseRepositoryInterface
         }
 
         if (isset($filters['keyword'])) {
+            $table = $this->model->getTable();
             $columns = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
             $keyword = $filters['keyword'];
             $query->where(function ($query) use ($keyword, $columns) {
                 foreach ($columns as $column) {
-                    $query->orWhere($column, 'LIKE', '%' . $keyword . '%');
+                    $query->orWhere($table . '.' . $column, 'LIKE', '%' . $keyword . '%');
                 }
             });
         }
