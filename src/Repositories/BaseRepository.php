@@ -256,7 +256,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
             $table = $this->model->getTable();
             $columns = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
             $keyword = $filters['keyword'];
-            $query->where(function ($query) use ($keyword, $columns) {
+            $query->where(function ($query) use ($table, $keyword, $columns) {
                 foreach ($columns as $column) {
                     $query->orWhere($table . '.' . $column, 'LIKE', '%' . $keyword . '%');
                 }
@@ -321,7 +321,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
             $table = $this->model->getTable();
             $columns = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
             $keyword = $filters['keyword'];
-            $query->where(function ($query) use ($keyword, $columns) {
+            $query->where(function ($query) use ($table, $keyword, $columns) {
                 foreach ($columns as $column) {
                     $query->orWhere($table . '.' . $column, 'LIKE', '%' . $keyword . '%');
                 }
