@@ -91,7 +91,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $this->find($id)->update($data);
     }
 
-    public function updateBy(array $conditions, array $data)
+    public function updateBy(array $data, array $conditions)
     {
         $query = self::filters($this->model->newQuery(), $conditions);
         return $query->update($data);
