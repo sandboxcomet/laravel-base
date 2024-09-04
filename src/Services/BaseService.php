@@ -43,9 +43,9 @@ abstract class BaseService
         return $this->repository->update($data, $id);
     }
 
-    public function updateBy(array $conditions, array $data)
+    public function updateBy(array $data, array $conditions)
     {
-        return $this->repository->updateBy($conditions, $data);
+        return $this->repository->updateBy($data, $conditions);
     }
 
     public function updateOrCreate(array $conditions, array $data)
